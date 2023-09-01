@@ -88,11 +88,11 @@
         output = "";
         totalValue = 0;
         for (let i = 0; i < months; i++) {
-            totalValue += monthlyPayment;
             const isEndOfYear = (i + 1) % 12 === 0;
             if (isEndOfYear) {
-                totalValue *= (1 + annualRate);
+                totalValue *= (1 + annualRate); // Applying annual interest
             }
+            totalValue += monthlyPayment; // Adding monthly payment after compounding
             output += `Month ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
         document.getElementById('output2').innerHTML = `<strong>Monthly payments with annual compounding:</strong><br>${output}`;
