@@ -45,21 +45,24 @@
     </div>
 
     <button class="btn btn-primary" onclick="calculateInvestments()">Calculate</button>
+    <br>
+    <br>
+    <br>
 
-    <div class="output-container mt-4" id="output1">
-        <strong>Annual payments with annual compounding:</strong>
+    <strong>Annual payments with annual compounding:</strong>
+    <div class="output-container" id="output1">
     </div>
 
+    <strong>Monthly payments with annual compounding:</strong>
     <div class="output-container" id="output2">
-        <strong>Monthly payments with annual compounding:</strong>
     </div>
 
+    <strong>Monthly payments with quarterly compounding:</strong>
     <div class="output-container" id="output3">
-        <strong>Monthly payments with quarterly compounding:</strong>
     </div>
 
+    <strong>Annual payments with quarterly compounding:</strong>
     <div class="output-container" id="output4">
-        <strong>Annual payments with quarterly compounding:</strong>
     </div>
 </div>
 
@@ -82,7 +85,7 @@
             totalValue *= (1 + annualRate);
             output += `Year ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
-        document.getElementById('output1').innerHTML = `<strong>Annual payments with annual compounding:</strong><br>${output}`;
+        document.getElementById('output1').innerHTML = `${output}`;
 
         // Monthly payments with annual compounding
         output = "";
@@ -95,7 +98,7 @@
             totalValue += monthlyPayment; // Adding monthly payment after compounding
             output += `Month ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
-        document.getElementById('output2').innerHTML = `<strong>Monthly payments with annual compounding:</strong><br>${output}`;
+        document.getElementById('output2').innerHTML = `${output}`;
 
 
         // Monthly payments with quarterly compounding
@@ -109,7 +112,7 @@
             }
             output += `Month ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
-        document.getElementById('output3').innerHTML = `<strong>Monthly payments with quarterly compounding:</strong><br>${output}`;
+        document.getElementById('output3').innerHTML = `${output}`;
 
         // Annual payments with quarterly compounding
         output = "";
@@ -125,7 +128,7 @@
             }
             output += `Month ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
-        document.getElementById('output4').innerHTML = `<strong>Annual payments with quarterly compounding:</strong><br>${output}`;
+        document.getElementById('output4').innerHTML = `${output}`;
     }
 </script>
 </body>
