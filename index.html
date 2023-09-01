@@ -89,13 +89,14 @@
         totalValue = 0;
         for (let i = 0; i < months; i++) {
             totalValue += monthlyPayment;
-            const isBeginningOfYear = (i + 1) % 12 === 1 || i === 0;
-            if (isBeginningOfYear) {
+            const isEndOfYear = (i + 1) % 12 === 0;
+            if (isEndOfYear) {
                 totalValue *= (1 + annualRate);
             }
             output += `Month ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
         document.getElementById('output2').innerHTML = `<strong>Monthly payments with annual compounding:</strong><br>${output}`;
+
 
         // Monthly payments with quarterly compounding
         output = "";
