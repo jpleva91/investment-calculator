@@ -25,13 +25,13 @@
     </div>
 
     <div class="form-group">
-        <label for="annualRate">Annual Rate:</label>
-        <input type="number" id="annualRate" class="form-control" value="0.03" step="0.01" min="0">
+        <label for="annualRate">Annual Rate (%):</label>
+        <input type="number" id="annualRate" class="form-control" value="3" step="0.1" min="0">
     </div>
 
     <div class="form-group">
-        <label for="quarterlyRate">Quarterly Rate (will be divided by 4):</label>
-        <input type="number" id="quarterlyRate" class="form-control" value="0.0275" step="0.001" min="0">
+        <label for="quarterlyRate">Quarterly Rate (will be divided by 4) (%):</label>
+        <input type="number" id="quarterlyRate" class="form-control" value="2.75" step="0.1" min="0">
     </div>
 
     <div class="form-group">
@@ -68,8 +68,8 @@
 
 <script>
     function calculateInvestments() {
-        const annualRate = parseFloat(document.getElementById('annualRate').value);
-        const quarterlyRate = parseFloat(document.getElementById('quarterlyRate').value) / 4;
+        const annualRate = parseFloat(document.getElementById('annualRate').value) / 100;
+        const quarterlyRate = parseFloat(document.getElementById('quarterlyRate').value) / 400; // divided by 4 and then by 100 to convert to fraction
         const monthlyPayment = parseFloat(document.getElementById('monthlyPayment').value);
         const annualPayment = parseFloat(document.getElementById('annualPayment').value);
         const years = parseInt(document.getElementById('years').value);
@@ -105,14 +105,15 @@
         output = "";
         totalValue = 0;
         for (let i = 0; i < months; i++) {
-            totalValue += monthlyPayment;
             const isEndOfQuarter = (i + 1) % 3 === 0;
             if (isEndOfQuarter) {
-                totalValue *= (1 + quarterlyRate);
+                totalValue *= (1 + quarterlyRate); // Applying quarterly interest
             }
+            totalValue += monthlyPayment; // Adding monthly payment after interest
             output += `Month ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
         document.getElementById('output3').innerHTML = `${output}`;
+
 
         // Annual payments with quarterly compounding
         output = "";
@@ -120,15 +121,16 @@
         for (let i = 0; i < months; i++) {
             const isBeginningOfYear = (i + 1) % 12 === 1;
             if (isBeginningOfYear) {
-                totalValue += annualPayment;
+                totalValue += annualPayment; // Adding annual payment
             }
             const isEndOfQuarter = (i + 1) % 3 === 0;
             if (isEndOfQuarter) {
-                totalValue *= (1 + quarterlyRate);
+                totalValue *= (1 + quarterlyRate); // Applying quarterly interest
             }
             output += `Month ${i + 1}: $${totalValue.toFixed(2)}<br>`;
         }
         document.getElementById('output4').innerHTML = `${output}`;
+
     }
 </script>
 </body>
